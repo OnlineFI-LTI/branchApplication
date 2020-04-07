@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lti.hackathon.project.banking.loans.api.model.LoanDetailsSummaryResponseModel;
 import com.lti.hackathon.project.banking.loans.api.repository.AccountRepository;
 import com.lti.hackathon.project.banking.loans.api.repository.LoanSchedulerRepository;
 import com.lti.hackathon.project.banking.loans.api.service.LoanDetailsService;
@@ -39,5 +40,15 @@ public class LoanDetailsServiceImpl implements LoanDetailsService{
 		List<Object[]> list = loanSchedulerRepository.getLoanOverdueAmount(new Date());
 		Map<String, BigDecimal> map = list.stream().collect(Collectors.toMap(a -> (String)a[0], a -> (BigDecimal) a[1]));
 		return map;
+	}
+
+	@Override//TODO : data is hard coded
+	public LoanDetailsSummaryResponseModel getLoanDetails() {
+		LoanDetailsSummaryResponseModel loanDetailsModel = new LoanDetailsSummaryResponseModel();
+		loanDetailsModel.setNumberOfLoanApplications("312");
+		loanDetailsModel.setNumberOfLoanAccounts("434");
+		loanDetailsModel.setNumberOfCustomers("434");
+		loanDetailsModel.setNumberOfLoanAcountDisbursed("23");
+		return loanDetailsModel;
 	}
 }
