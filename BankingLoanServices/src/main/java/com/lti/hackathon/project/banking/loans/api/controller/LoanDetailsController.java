@@ -43,7 +43,7 @@ public class LoanDetailsController {
 	
 	@GetMapping(value = "/loansSummary/{locationId}")
 	public LoanDetailsSummaryResponseModel getLoanSummaryDetails(@PathVariable("locationId") String locationid) {
-		LoanDetailsSummaryResponseModel responseModel = loanDetailsService.getLoanDetails();
+		LoanDetailsSummaryResponseModel responseModel = loanDetailsService.getLoanDetails(locationid);
 		return responseModel;
 	}
 }

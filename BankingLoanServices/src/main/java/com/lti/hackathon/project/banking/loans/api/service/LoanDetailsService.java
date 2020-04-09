@@ -10,5 +10,5 @@ public interface LoanDetailsService {
 	Map<String, BigDecimal> getLoanOutstandingAmount();
 
 	Map<String, BigDecimal> getLoanOverdueAmount();
-	LoanDetailsSummaryResponseModel getLoanDetails();
+	LoanDetailsSummaryResponseModel getLoanDetails(String locationid);
 }

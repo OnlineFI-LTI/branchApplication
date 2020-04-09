@@ -1,11 +1,13 @@
 package com.lti.hackathon.project.banking.loans.api.model;
 
+import java.math.BigDecimal;
+
 public class LoanDetailsSummaryResponseModel {
 
 	private String numberOfLoanApplications;
 	private String numberOfLoanAccounts;
 	private String numberOfCustomers;
-	private String numberOfLoanAcountDisbursed;
+	private BigDecimal loanAmountDisbursed;
 
 	
 	public String getNumberOfLoanApplications() {
@@ -26,12 +28,12 @@ public class LoanDetailsSummaryResponseModel {
 	public void setNumberOfCustomers(String numberOfCustomers) {
 		this.numberOfCustomers = numberOfCustomers;
 	}
-	public String getNumberOfLoanAcountDisbursed() {
-		return numberOfLoanAcountDisbursed;
+	public BigDecimal getLoanAmountDisbursed() {
+		return loanAmountDisbursed;
 	}
-	public void setNumberOfLoanAcountDisbursed(String numberOfLoanAcountDisbursed) {
-		this.numberOfLoanAcountDisbursed = numberOfLoanAcountDisbursed;
+	public void setLoanAmountDisbursed(BigDecimal loanAmountDisbursed) {
+		this.loanAmountDisbursed = loanAmountDisbursed;
 	}
-
+	
 	
 }

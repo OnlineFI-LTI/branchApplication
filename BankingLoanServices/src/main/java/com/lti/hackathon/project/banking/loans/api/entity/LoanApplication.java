@@ -1,5 +1,7 @@
 package com.lti.hackathon.project.banking.loans.api.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +26,14 @@ public class LoanApplication {
 	@JoinColumn(name = "product_id")
 	private Product product;
 
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
+	
+	private BigDecimal effectiveLoanAmount;
+	
+	private String disbursedFlag;
+	
 	public String getLoanApplicationNumber() {
 		return loanApplicationNumber;
 	}
@@ -46,6 +56,38 @@ public class LoanApplication {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public BigDecimal getEffectiveLoanAmount() {
+		return effectiveLoanAmount;
+	}
+
+	public void setEffectiveLoanAmount(BigDecimal effectiveLoanAmount) {
+		this.effectiveLoanAmount = effectiveLoanAmount;
+	}
+
+	public String getDisbursedFlag() {
+		return disbursedFlag;
+	}
+
+	public void setDisbursedFlag(String disbursedFlag) {
+		this.disbursedFlag = disbursedFlag;
 	}
 
 }

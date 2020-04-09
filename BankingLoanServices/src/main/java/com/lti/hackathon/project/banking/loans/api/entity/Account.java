@@ -30,6 +30,10 @@ public class Account {
 	@JoinColumn(name = "product_id")
 	private Product product;
 	
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location location;
+	
 	private String accountHolderName;
 	
 	private Integer accountStatus;

@@ -12,6 +12,7 @@ public interface AccountRepository extends CrudRepository<Account, Long>{
 	@Query("select p.name, sum(a.loanBalance) from accounts a inner join products p on a.product.id = p.id group by a.product.id")
 	public List<Object[]> getLoanOutstandingAmount();
 	
-	
+	@Query ("select count(a) from accounts a where a.location.id = ?1")
+    String countAccounts(Long locationId);
 	
 }

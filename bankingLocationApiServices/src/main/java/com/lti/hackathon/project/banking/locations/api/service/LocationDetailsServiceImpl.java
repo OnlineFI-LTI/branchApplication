@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.lti.hackathon.project.banking.locations.api.model.LoansResponseModel;
 import com.lti.hackathon.project.banking.locations.api.model.LocationDetailsResponseModel;
+import com.lti.hackathon.project.banking.locations.api.repository.TransactionRepository;
 
 @Service
 public class LocationDetailsServiceImpl implements LocationDetailsService{
@@ -24,21 +25,25 @@ public class LocationDetailsServiceImpl implements LocationDetailsService{
 	@Autowired
 	RestTemplate restTemplate;
 	
+	@Autowired
+	TransactionRepository transactionsRepository;
+
+	public static final Integer CASH_TRANS =1; 
+	public static final Integer TRANSF_TRANS =2; 
+
 	
 	@Override
 	public LocationDetailsResponseModel getLoanApplicationsDetails(String locationId) {
 		logger.info("Before calling loans Microservice");
-		
         String loansUrl = String.format(environment.getProperty("loans.summary.url"), locationId);
-        
         ResponseEntity<LoansResponseModel> loansResponse = restTemplate.exchange(loansUrl, HttpMethod.GET, null, new ParameterizedTypeReference<LoansResponseModel>() {
         });
         LoansResponseModel loansResponseModel = loansResponse.getBody();
-        System.out.println("#######################################"+loansResponseModel);
 		 logger.info("After calling loans Microservice");
+		
 		 LocationDetailsResponseModel locationDetailsResponseModel = new LocationDetailsResponseModel(loansResponseModel);
-		 locationDetailsResponseModel.setNumberOfCashTransactionInAday("2");
-		 locationDetailsResponseModel.setNumberOfTransferTransactionInAday("5");
+		 locationDetailsResponseModel.setNumberOfCashTransactionInAday(transactionsRepository.countCashTransations(Long.valueOf(locationId), CASH_TRANS));
+		 locationDetailsResponseModel.setNumberOfTransferTransactionInAday(transactionsRepository.countCashTransations(Long.valueOf(locationId), TRANSF_TRANS));
 		return locationDetailsResponseModel;
 	}
 
