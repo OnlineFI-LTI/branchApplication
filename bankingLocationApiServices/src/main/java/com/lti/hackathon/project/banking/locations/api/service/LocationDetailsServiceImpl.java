@@ -41,9 +41,14 @@ public class LocationDetailsServiceImpl implements LocationDetailsService{
         LoansResponseModel loansResponseModel = loansResponse.getBody();
 		 logger.info("After calling loans Microservice");
 		
-		 LocationDetailsResponseModel locationDetailsResponseModel = new LocationDetailsResponseModel(loansResponseModel);
+		 LocationDetailsResponseModel locationDetailsResponseModel = new LocationDetailsResponseModel();
 		 locationDetailsResponseModel.setNumberOfCashTransactionInAday(transactionsRepository.countCashTransations(Long.valueOf(locationId), CASH_TRANS));
 		 locationDetailsResponseModel.setNumberOfTransferTransactionInAday(transactionsRepository.countCashTransations(Long.valueOf(locationId), TRANSF_TRANS));
+		 locationDetailsResponseModel.setNumberOfLoanApplications(loansResponseModel.getNumberOfLoanApplications());
+		 locationDetailsResponseModel.setNumberOfLoanAccounts(loansResponseModel.getNumberOfLoanAccounts());
+		 locationDetailsResponseModel.setNumberOfCustomers(loansResponseModel.getNumberOfCustomers());
+		 locationDetailsResponseModel.setLoanAmountDisbursed(loansResponseModel.getLoanAmountDisbursed());
+		 
 		return locationDetailsResponseModel;
 	}
 
