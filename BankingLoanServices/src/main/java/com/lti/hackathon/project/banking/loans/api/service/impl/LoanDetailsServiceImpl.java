@@ -37,16 +37,16 @@ public class LoanDetailsServiceImpl implements LoanDetailsService {
 	}
 
 	@Override
-	public Map<String, BigDecimal> getLoanOutstandingAmount() {
-		List<Object[]> list = accountRepository.getLoanOutstandingAmount();
+	public Map<String, BigDecimal> getLoanOutstandingAmount(Long locationId) {
+		List<Object[]> list = accountRepository.getLoanOutstandingAmount(locationId);
 		Map<String, BigDecimal> map = list.stream()
 				.collect(Collectors.toMap(a -> (String) a[0], a -> (BigDecimal) a[1]));
 		return map;
 	}
 
 	@Override
-	public Map<String, BigDecimal> getLoanOverdueAmount() {
-		List<Object[]> list = loanSchedulerRepository.getLoanOverdueAmount(new Date());
+	public Map<String, BigDecimal> getLoanOverdueAmount(Long locationId) {
+		List<Object[]> list = loanSchedulerRepository.getLoanOverdueAmount(new Date(),locationId);
 		Map<String, BigDecimal> map = list.stream()
 				.collect(Collectors.toMap(a -> (String) a[0], a -> (BigDecimal) a[1]));
 		return map;

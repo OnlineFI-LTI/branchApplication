@@ -7,8 +7,8 @@ import com.lti.hackathon.project.banking.loans.api.model.LoanDetailsSummaryRespo
 
 public interface LoanDetailsService {
 
-	Map<String, BigDecimal> getLoanOutstandingAmount();
+	Map<String, BigDecimal> getLoanOutstandingAmount(Long locationId);
 
-	Map<String, BigDecimal> getLoanOverdueAmount();
+	Map<String, BigDecimal> getLoanOverdueAmount(Long locationId);
 	LoanDetailsSummaryResponseModel getLoanDetails(String locationid);
 }

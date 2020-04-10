@@ -22,22 +22,24 @@ public class LoanDetailsController {
 	@GetMapping("/status/check")
 	public String getloanDetails() {
 
-		loanDetailsService.getLoanOutstandingAmount();
-		loanDetailsService.getLoanOverdueAmount();
+		/*
+		 * loanDetailsService.getLoanOutstandingAmount();
+		 * loanDetailsService.getLoanOverdueAmount();
+		 */
 		return "it works";
 	}
 
-	@GetMapping(value = "/loanOutstandings/{branchId}")
-	public Map<String, BigDecimal> getBranchLoanOutstandingsDetails(@PathVariable("branchId") String branchId) {
+	@GetMapping(value = "/loanOutstandings/{locationId}")
+	public Map<String, BigDecimal> getBranchLoanOutstandingsDetails(@PathVariable("locationId") String locationId) {
 
-		Map<String, BigDecimal> loanDetailsResponse = loanDetailsService.getLoanOutstandingAmount();
+		Map<String, BigDecimal> loanDetailsResponse = loanDetailsService.getLoanOutstandingAmount(Long.valueOf(locationId));
 
 		return loanDetailsResponse;
 	}
 	
-	@GetMapping(value = "/loanOverdues/{branchId}")
-	public Map<String, BigDecimal> getBranchLoanOverdueDetails(@PathVariable("branchId") String branchId) {
-		Map<String, BigDecimal> loanDetailsResponse = loanDetailsService.getLoanOverdueAmount();
+	@GetMapping(value = "/loanOverdues/{locationId}")
+	public Map<String, BigDecimal> getBranchLoanOverdueDetails(@PathVariable("locationId") String locationId) {
+		Map<String, BigDecimal> loanDetailsResponse = loanDetailsService.getLoanOverdueAmount(Long.valueOf(locationId));
 		return loanDetailsResponse;
 	}
 	
